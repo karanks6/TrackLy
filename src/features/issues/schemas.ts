@@ -26,7 +26,7 @@ export const createIssueSchema = z.object({
   description: z.string().optional(),
   status: issueStatusSchema.default("open"),
   priority: issuePrioritySchema.default("medium"),
-  assignee_id: z.string().uuid().nullable().optional()
+  assignee_id: z.union([z.string().uuid(), z.literal("")]).transform(val => val === "" ? null : val).nullable().optional()
 })
 
 export type CreateIssueInput = z.infer<typeof createIssueSchema>

@@ -119,7 +119,7 @@ CREATE POLICY "Users can update own profile" ON profiles FOR UPDATE USING (auth.
 -- Issues policies
 CREATE POLICY "Issues are viewable by everyone" ON issues FOR SELECT USING (true);
 CREATE POLICY "Users can create issues" ON issues FOR INSERT WITH CHECK (auth.uid() = reporter_id);
-CREATE POLICY "Reporter or assignee can update issue" ON issues FOR UPDATE USING (auth.uid() = reporter_id OR auth.uid() = assignee_id);
+CREATE POLICY "Users can update issues" ON issues FOR UPDATE USING (auth.role() = 'authenticated');
 CREATE POLICY "Reporter can delete issue" ON issues FOR DELETE USING (auth.uid() = reporter_id);
 
 -- Comments policies

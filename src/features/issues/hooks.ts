@@ -16,6 +16,7 @@ export function useIssues() {
   return useQuery({
     queryKey: issuesKeys.lists(),
     queryFn: getIssues,
+    retry: 1
   })
 }
 

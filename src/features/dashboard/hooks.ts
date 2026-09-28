@@ -9,5 +9,6 @@ export function useDashboardStats() {
   return useQuery({
     queryKey: dashboardKeys.stats,
     queryFn: getDashboardStats,
+    retry: 1
   })
 }

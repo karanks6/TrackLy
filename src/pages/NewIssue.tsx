@@ -5,7 +5,7 @@ import { createIssueSchema } from "@/features/issues/schemas"
 import { useCreateIssue } from "@/features/issues/hooks"
 import { useProfiles } from "@/features/profiles/hooks"
 import { Link } from "react-router-dom"
-import { Loader2, ArrowLeft } from "lucide-react"
+import { Spinner, ArrowLeft } from "@phosphor-icons/react"
 
 export function NewIssue() {
   const { mutate: createIssue, isPending } = useCreateIssue()
@@ -26,13 +26,13 @@ export function NewIssue() {
   return (
     <div className="max-w-2xl mx-auto py-8">
       <Link to="/issues" className="inline-flex items-center text-text-muted hover:text-text mb-6 transition-colors">
-        <ArrowLeft size={16} className="mr-2" />
+        <ArrowLeft weight="regular" />
         Back to issues
       </Link>
       
       <h1 className="text-3xl font-bold text-text mb-8">Create New Issue</h1>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="bg-surface p-6 sm:p-8 rounded-xl border border-border space-y-6 shadow-sm">
+      <form onSubmit={handleSubmit(onSubmit)} className="bg-surface p-6 sm:p-8 rounded-xl border border-border space-y-6">
         <div>
           <label className="block text-sm font-medium text-text mb-2">Title</label>
           <input
@@ -62,9 +62,9 @@ export function NewIssue() {
               {...register("status")}
               className="w-full px-4 py-2.5 rounded-lg bg-background border border-border text-text focus:outline-none focus:ring-2 focus:ring-primary appearance-none"
             >
-              <option value="open">Open</option>
-              <option value="in_progress">In Progress</option>
-              <option value="closed">Closed</option>
+              <option value="open" className="bg-surface text-text">Open</option>
+              <option value="in_progress" className="bg-surface text-text">In Progress</option>
+              <option value="closed" className="bg-surface text-text">Closed</option>
             </select>
           </div>
 
@@ -74,10 +74,10 @@ export function NewIssue() {
               {...register("priority")}
               className="w-full px-4 py-2.5 rounded-lg bg-background border border-border text-text focus:outline-none focus:ring-2 focus:ring-primary appearance-none"
             >
-              <option value="low">Low</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
-              <option value="critical">Critical</option>
+              <option value="low" className="bg-surface text-text">Low</option>
+              <option value="medium" className="bg-surface text-text">Medium</option>
+              <option value="high" className="bg-surface text-text">High</option>
+              <option value="critical" className="bg-surface text-text">Critical</option>
             </select>
           </div>
         </div>
@@ -89,9 +89,9 @@ export function NewIssue() {
             className="w-full px-4 py-2.5 rounded-lg bg-background border border-border text-text focus:outline-none focus:ring-2 focus:ring-primary appearance-none"
             disabled={isLoadingProfiles}
           >
-            <option value="">Unassigned</option>
+            <option value="" className="bg-surface text-text">Unassigned</option>
             {profiles?.map(profile => (
-              <option key={profile.id} value={profile.id}>
+              <option key={profile.id} value={profile.id} className="bg-surface text-text">
                 {profile.full_name}
               </option>
             ))}
@@ -102,9 +102,9 @@ export function NewIssue() {
           <button
             type="submit"
             disabled={isPending}
-            className="bg-primary hover:bg-primary-hover text-white px-6 py-2.5 rounded-lg font-medium flex items-center transition-colors disabled:opacity-70"
+            className="bg-primary hover:bg-primary-hover text-on-primary px-6 py-2.5 rounded-lg font-medium flex items-center transition-colors disabled:opacity-70"
           >
-            {isPending ? <Loader2 className="animate-spin mr-2" size={18} /> : null}
+            {isPending ? <Spinner weight="regular" /> : null}
             Create Issue
           </button>
         </div>

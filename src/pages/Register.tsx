@@ -7,7 +7,7 @@ import type { RegisterInput } from "@/features/auth/schemas"
 import { registerWithEmail } from "@/features/auth/api"
 import { toast } from "sonner"
 import { motion } from "motion/react"
-import { Eye, EyeOff, Loader2 } from "lucide-react"
+import { Eye, EyeClosed, Spinner, ArrowLeft } from "@phosphor-icons/react"
 
 export function Register() {
   const [showPassword, setShowPassword] = useState(false)
@@ -20,18 +20,21 @@ export function Register() {
   const onSubmit = async (data: RegisterInput) => {
     try {
       await registerWithEmail(data)
-      toast.success("Successfully registered! You can now log in.")
-      navigate("/dashboard")
+      toast.success("Confirmation email is sent. Please verify your account.")
+      navigate("/login")
     } catch (error: any) {
       toast.error(error.message || "Failed to register")
     }
   }
 
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="flex min-h-screen bg-background relative">
+      <Link to="/" className="absolute top-6 left-6 z-50 flex items-center gap-2 text-sm font-medium text-text-muted hover:text-text transition-colors bg-surface-elevated/50 p-2 rounded-full backdrop-blur-md">
+        <ArrowLeft size={20} /> <span className="hidden md:inline">Back</span>
+      </Link>
       {/* Brand Panel */}
       <div className="hidden lg:flex lg:w-1/2 flex-col justify-center p-12 relative overflow-hidden bg-surface-elevated">
-        <div className="absolute inset-0 opacity-30 bg-gradient-to-tr from-accent to-primary blur-3xl z-0" />
+        <div className="absolute inset-0 bg-surface z-0 border-r border-border" />
         <div className="z-10 max-w-lg mx-auto">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
@@ -84,7 +87,7 @@ export function Register() {
                 {...register("fullName")}
                 type="text"
                 className="w-full px-4 py-3 rounded-lg bg-surface border border-border text-text focus:outline-none focus:ring-2 focus:ring-primary transition-shadow"
-                placeholder="Jane Doe"
+                placeholder="Marcus Vance"
               />
               {errors.fullName && <p className="text-red-500 text-sm mt-1">{errors.fullName.message}</p>}
             </div>
@@ -114,7 +117,7 @@ export function Register() {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-4 top-3 text-text-muted hover:text-text"
                 >
-                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  {showPassword ? <Eye weight="regular" /> : <EyeClosed weight="regular" />}
                 </button>
               </div>
               {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
@@ -134,9 +137,9 @@ export function Register() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-primary hover:bg-primary-hover text-white font-medium py-3 rounded-lg transition-colors flex items-center justify-center disabled:opacity-70 mt-4"
+              className="w-full bg-primary hover:bg-primary-hover text-on-primary font-medium py-3 rounded-lg transition-colors flex items-center justify-center disabled:opacity-70 mt-4"
             >
-              {isSubmitting ? <Loader2 className="animate-spin mr-2" size={20} /> : null}
+              {isSubmitting ? <Spinner weight="regular" /> : null}
               Create Account
             </button>
           </form>
