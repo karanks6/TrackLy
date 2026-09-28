@@ -30,7 +30,6 @@ export function IssueDetail() {
   }
 
   const isReporter = user?.id === issue.reporter_id
-  const isAssignee = user?.id === issue.assignee_id
   const canEdit = !!user
 
   const handleTitleSubmit = () => {

@@ -16,7 +16,6 @@ import {
   List, 
   X, 
   CaretDown, 
-  GearSix,
   Kanban
 } from "@phosphor-icons/react"
 

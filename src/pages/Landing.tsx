@@ -1,7 +1,7 @@
 import { useState, useRef } from "react"
 import { motion, useScroll, useTransform, useMotionValueEvent, AnimatePresence } from "motion/react"
 import { Link } from "react-router-dom"
-import { List, X, GithubLogo, SquaresFour, Users, CheckCircle, WarningCircle, ChatCircle, Calendar, Plus, User, ChartLineUp, EnvelopeSimple, Sun, Moon, Monitor, Kanban } from "@phosphor-icons/react"
+import { List, X, GithubLogo, SquaresFour, Users, CheckCircle, WarningCircle, Calendar, Plus, User, ChartLineUp, EnvelopeSimple, Sun, Moon, Monitor, Kanban } from "@phosphor-icons/react"
 import { useTheme } from "@/app/theme-provider"
 import { BlurText } from "@/components/reactbits/BlurText"
 import { Magnet } from "@/components/reactbits/Magnet"
