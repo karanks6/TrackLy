@@ -102,10 +102,34 @@ Data operations are handled via `@supabase/supabase-js` and React Query.
 - `npm run build`: Compiles TypeScript and builds the Vite production bundle.
 - `npm run typecheck`: Validates TypeScript without emitting.
 - `npm run preview`: Locally previews the production build.
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file locally, and to your hosting provider's settings (e.g. Vercel) for deployment:
+
+`VITE_SUPABASE_URL`
+The REST URL for your Supabase project (found in Project Settings -> API).
+
+`VITE_SUPABASE_ANON_KEY`
+The anonymous public API key for your Supabase project.
+
+## Deployment
+
+TrackLy is configured for seamless deployment to Vercel and Supabase.
+
+1. **Frontend (Vercel):**
+   - Push your code to a GitHub repository.
+   - Import the project into Vercel.
+   - Add the required `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` environment variables in the Vercel dashboard.
+   - Deploy! Vercel will automatically build and host the application.
+2. **Backend (Supabase):**
+   - In your Supabase dashboard, ensure you've run the SQL migrations located in `supabase/migrations/0001_init.sql`.
+   - In Supabase Auth settings, update the "Site URL" and "Redirect URLs" to match your Vercel production URL.
+
 ## Troubleshooting
 - **Email Rate Limit Exceeded:** If you get this error during testing, go to Supabase Dashboard -> Auth -> Providers -> Email, and disable "Confirm email" for local development.
 - **Supabase Triggers:** If profiles aren't created when users sign up, ensure you ran the `0001_init.sql` script completely so the `handle_new_user` trigger exists.
 
 
-## Live Demo
+## Live Deployment URL
 https://trackly-demo.vercel.app
+
