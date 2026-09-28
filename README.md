@@ -1,14 +1,15 @@
 # TrackLy - Issue Tracking System
 
-TrackLy is a modern, responsive, and highly interactive issue tracking application built with a premium dark-first SaaS aesthetic. It is designed to help teams organize, assign, and manage issues efficiently.
+TrackLy is a modern, responsive, and highly interactive issue tracking application built with a premium "Ink-Slate" SaaS aesthetic. It is designed to help students and small teams organize, assign, and manage issues efficiently without the enterprise bloat.
 
 ## Features
-- **User Authentication:** Secure email/password login and registration.
-- **Issue Management:** Complete CRUD operations for issues.
+- **User Authentication:** Secure email/password login and registration powered by Supabase.
+- **Dynamic Landing Page:** A gorgeous entry point with Aurora background effects, interactive 3D elements, and smooth scroll animations.
+- **Issue Management:** Complete CRUD operations for issues, instantly synced and validated.
 - **Assignment & Status Tracking:** Assign issues to team members and track their status (Open, In Progress, Closed).
-- **Interactive Dashboard:** Visualizations of team progress and recent activity.
+- **Interactive Dashboard:** Visualizations of team progress, issue counts, and recent activity.
 - **Comments:** Real-time discussion threads on issues.
-- **Design System:** Built with Tailwind CSS v4, Framer Motion for smooth animations, and Shadcn UI patterns. Light and Dark themes supported.
+- **Premium Design System:** Built with Tailwind CSS v4, Framer Motion for smooth animations, and the Phosphor Icons library. Fully supports seamless Light, Dark, and System themes.
 
 ## Architecture
 The application uses a modern decoupled architecture:
@@ -28,7 +29,7 @@ graph TD
 | Category | Technology |
 |---|---|
 | Core | React 18, TypeScript, Vite |
-| Styling | Tailwind CSS v4, Lucide React, Shadcn UI patterns |
+| Styling | Tailwind CSS v4, Phosphor Icons, Custom UI patterns |
 | State/Data | TanStack Query, React Hook Form, Zod |
 | Animation | Framer Motion (motion/react) |
 | Backend | Supabase |
@@ -37,13 +38,13 @@ graph TD
 ```
 src/
   app/          # Global providers (Auth, Theme, Router)
-  components/   # Reusable UI components (Layout, Comments)
+  components/   # Reusable UI components (Layout, Comments, ReactBits)
   features/     # Domain-specific logic (Auth, Issues, Dashboard)
   lib/          # Utilities and Supabase client
-  pages/        # Route components (Dashboard, Issues, Login)
-  styles/       # Global CSS and Tailwind tokens
+  pages/        # Route components (Landing, Dashboard, Issues, Login)
+  styles/       # Global CSS and Tailwind tokens (Ink-Slate design)
 supabase/       # Database migrations and seed scripts
-docs/           # Documentation (BRD)
+docs/           # Documentation (BRD, Design System)
 ```
 
 ## Prerequisites
@@ -77,22 +78,22 @@ docs/           # Documentation (BRD)
    ```bash
    npm run dev
    ```
-   Open `http://localhost:5173` in your browser.
+   Open `http://localhost:5173` (or the port specified in your terminal) in your browser.
 
 ## Database Schema Summary
-- `profiles`: Stores user metadata, linked to Supabase Auth.
+- `profiles`: Stores user metadata, automatically populated via database triggers on user signup.
 - `issues`: Stores issue details, status, priority, and relationships to reporter and assignee.
 - `comments`: Discussion threads linked to issues.
-*(Row Level Security is enabled on all tables to ensure users can only modify their own data.)*
+*(Row Level Security is enabled on all tables. Any authenticated user can modify issues to facilitate team collaboration.)*
 
 ## API Overview
 Data operations are handled via `@supabase/supabase-js` and React Query.
 - **Auth:** `signUp`, `signInWithPassword`, `signOut`.
 - **Issues:**
   - `getIssues`: Selects all issues with reporter and assignee relations.
-  - `createIssue`: Inserts a new row (requires authentication, reporter_id must match auth.uid()).
-  - `updateIssue`: Updates a row (allowed for reporter or assignee).
-  - `deleteIssue`: Deletes a row (allowed for reporter).
+  - `createIssue`: Inserts a new row.
+  - `updateIssue`: Updates a row (allowed for any authenticated user).
+  - `deleteIssue`: Deletes a row.
 - **Comments:** `getComments`, `createComment`, `deleteComment`.
 - **Dashboard:** RPC call to `get_dashboard_stats` function.
 
@@ -100,10 +101,11 @@ Data operations are handled via `@supabase/supabase-js` and React Query.
 - `npm run dev`: Starts the local development server.
 - `npm run build`: Compiles TypeScript and builds the Vite production bundle.
 - `npm run typecheck`: Validates TypeScript without emitting.
-
-
+- `npm run preview`: Locally previews the production build.
 ## Troubleshooting
-- **Deprecation Warnings:** If TypeScript warns about `baseUrl`, ignore it or use `tsc -b`. The build will still pass.
-- **Login fails:** Ensure you have confirmed your email in Supabase Auth, or disable "Confirm email" in the Supabase Auth providers settings for development.
+- **Email Rate Limit Exceeded:** If you get this error during testing, go to Supabase Dashboard -> Auth -> Providers -> Email, and disable "Confirm email" for local development.
+- **Supabase Triggers:** If profiles aren't created when users sign up, ensure you ran the `0001_init.sql` script completely so the `handle_new_user` trigger exists.
 
 
+## Live Demo
+https://trackly-demo.vercel.app
