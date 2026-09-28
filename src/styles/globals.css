@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-accent: var(--accent);
+  
+  --color-status-open: var(--status-open);
+  --color-status-in-progress: var(--status-in-progress);
+  --color-status-closed: var(--status-closed);
+  
+  --color-priority-low: var(--priority-low);
+  --color-priority-medium: var(--priority-medium);
+  --color-priority-high: var(--priority-high);
+  --color-priority-critical: var(--priority-critical);
+  
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+@layer base {
+  :root {
+    --background: #F6F7FB;
+    --surface: #FFFFFF;
+    --surface-elevated: #F8F9FC;
+    --border: #E4E7F0;
+    --text: #12151F;
+    --text-muted: #5E6680;
+    
+    --primary: #7C5CFF;
+    --primary-hover: #9078FF;
+    --accent: #22D3EE;
+
+    --status-open: #38BDF8;
+    --status-in-progress: #F59E0B;
+    --status-closed: #10B981;
+    
+    --priority-low: #94A3B8;
+    --priority-medium: #60A5FA;
+    --priority-high: #FB923C;
+    --priority-critical: #F43F5E;
+    
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: #0B0D14;
+    --surface: #12151F;
+    --surface-elevated: #1A1E2B;
+    --border: #262B3B;
+    --text: #E8EAF2;
+    --text-muted: #8A91A8;
+    
+    --primary: #7C5CFF;
+    --primary-hover: #9078FF;
+    --accent: #22D3EE;
+
+    --status-open: #38BDF8;
+    --status-in-progress: #F59E0B;
+    --status-closed: #10B981;
+    
+    --priority-low: #94A3B8;
+    --priority-medium: #60A5FA;
+    --priority-high: #FB923C;
+    --priority-critical: #F43F5E;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--text);
+    font-family: var(--font-sans);
+  }
+}
