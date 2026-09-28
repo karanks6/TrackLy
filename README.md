@@ -101,15 +101,6 @@ Data operations are handled via `@supabase/supabase-js` and React Query.
 - `npm run build`: Compiles TypeScript and builds the Vite production bundle.
 - `npm run typecheck`: Validates TypeScript without emitting.
 
-## Deployment Instructions
-
-1. Push your code to a GitHub repository.
-2. Go to [Vercel](https://vercel.com) and import the repository.
-3. In the Vercel project settings, add the Environment Variables:
-   - `VITE_SUPABASE_URL`
-   - `VITE_SUPABASE_ANON_KEY`
-4. Deploy the project.
-5. **Crucial Step:** In your Supabase Dashboard under Auth > URL Configuration, add your new Vercel domain to the "Redirect URLs" list.
 
 ## Troubleshooting
 - **Deprecation Warnings:** If TypeScript warns about `baseUrl`, ignore it or use `tsc -b`. The build will still pass.
