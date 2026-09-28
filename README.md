@@ -115,5 +115,4 @@ Data operations are handled via `@supabase/supabase-js` and React Query.
 - **Deprecation Warnings:** If TypeScript warns about `baseUrl`, ignore it or use `tsc -b`. The build will still pass.
 - **Login fails:** Ensure you have confirmed your email in Supabase Auth, or disable "Confirm email" in the Supabase Auth providers settings for development.
 
-## Live Demo
-https://trackly-demo.vercel.app (Placeholder URL)
+
